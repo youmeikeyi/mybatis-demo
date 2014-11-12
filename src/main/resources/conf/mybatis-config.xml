@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="conf/jdbc.properties" />
+    <!-- 命名空间 -->
+    <typeAliases>
+        <typeAlias alias="User" type="com.meki.mybatis.model.User"/>
+        <package name="com.meki.mybatis.model"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 映射map -->
+    <mappers>
+        <!-- 通过mapper元素的resource属性可以指定一个相对于根类路径的Mapper.xml文件 -->
+        <!--<mapper resource="com/meki/mybatis/dao/UserMapper.xml" /> 记得修改命名空间-->
+        <mapper resource="mapper/UserMapper.xml" />
+        <!-- 通过mapper元素的url属性可以指定一个通过URL请求的Mapper.xml文件 -->
+        <!--<mapper url="file:///D:/mywork/svn/meki/mybatis/src/main/resource/mapper/UserMapper.xml"/>-->
+
+        <!-- 通过mapper元素的class属性可以指定一个Mapper接口进行注册 -->
+        <!--<mapper class="com.meki.mybatis.mapperinterface.UserMapper" />-->
+        <!-- 通过package元素将会把指定包下面的所有Mapper接口进行注册 -->
+        <package name="com.meki.mybatis.mapperinterface" />
+    </mappers>
+</configuration>
